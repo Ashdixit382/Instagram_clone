@@ -34,11 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     String res = await AuthMethod().LoginUser(
         email: _emailController.text, password: _passwordController.text);
-
+    setState(() {
+      _isloading = false;
+    });
     if (res == 'success') {
-      setState(() {
-        _isloading = false;
-      });
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(

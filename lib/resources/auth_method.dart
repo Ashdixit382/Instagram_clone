@@ -19,11 +19,12 @@ class AuthMethod {
       if (email.isNotEmpty ||
           username.isNotEmpty ||
           password.isNotEmpty ||
-          bio.isNotEmpty) {
+          bio.isNotEmpty ||
+          file != null) {
         // register user
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-        // storage the files
+        // // storage the files
         String photourl =
             await StorageMethod().uploadImageToStorage('photopic', file, false);
         // add user to our database
@@ -36,7 +37,7 @@ class AuthMethod {
           'follower': [],
           'photourl': photourl,
         });
-        print(cred.user!.uid);
+        // print(cred.user!.uid);
         // await _firestore.collection('users').add({
         //   'username': username,
         //   'email': email,
@@ -46,7 +47,6 @@ class AuthMethod {
         //   'following': [],
         //   'follower': [],
         // });
-
         res = "success";
       }
     }

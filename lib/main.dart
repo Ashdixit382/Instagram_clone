@@ -6,7 +6,6 @@ import 'package:instagram_flutter/Screen/login_Screen.dart';
 import 'package:instagram_flutter/responsive/responsive_layout_screen.dart';
 // import 'package:instagram_flutter/Screen/login_Screen.dart';
 import 'package:instagram_flutter/responsive/mobile_screen_layout.dart';
-import 'package:instagram_flutter/responsive/responsive_layout_screen.dart';
 import 'package:instagram_flutter/responsive/web_screen_layout.dart';
 import 'package:instagram_flutter/utils/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,10 +15,12 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-          apiKey: "AIzaSyAfAmFG6PkVkLxzBZ9LDyJwpyWeo7fPKgw",
-          appId: "1:431098019958:web:9835b727ec63a3f2979f57",
-          messagingSenderId: "431098019958",
-          projectId: "instagram-clone-cc080"),
+        apiKey: "AIzaSyAfAmFG6PkVkLxzBZ9LDyJwpyWeo7fPKgw",
+        appId: "1:431098019958:web:9835b727ec63a3f2979f57",
+        storageBucket: "instagram-clone-cc080.appspot.com",
+        messagingSenderId: "431098019958",
+        projectId: "instagram-clone-cc080",
+      ),
     );
   } else {
     await Firebase.initializeApp();

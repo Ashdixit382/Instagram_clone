@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,21 +53,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
       bio: _bioController.text,
       file: _image!,
     );
-
-    if (res != 'success') {
-      showSnackBar(res, context);
-      setState(() {
-        _isloading = false;
-      });
-    } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const ResponsiveLayout(
-            mobilescreenlayout: MobileScreenLayout(),
-            webscreenlayout: WebScreenLayout(),
+    setState(() {
+      _isloading = false;
+    });
+    if (res == 'success') {
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+              mobilescreenlayout: MobileScreenLayout(),
+              webscreenlayout: WebScreenLayout(),
+            ),
           ),
-        ),
-      );
+        );
+      }
+    } else {
+      if (context.mounted) {
+        showSnackBar(res, context);
+      }
     }
   }
 
@@ -89,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               Flexible(
                 child: Container(),
-                flex: 2,
+                flex: 1,
               ),
               // svg image
               SvgPicture.asset(
@@ -176,8 +178,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: _isloading
                       ? const Center(
                           child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ))
+                            color: Colors.white,
+                          ),
+                        )
                       : Text('Sign Up'),
                 ),
               ),
